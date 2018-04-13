@@ -18,6 +18,8 @@ from villagelib import *
 # TODO: Rename npc_male_1.py to npc_templates.py?
 import sprites
 
+pygame.init()
+
 SCREEN_WIDTH: int = 640
 SCREEN_HEIGHT: int = 480
 SCREEN_CENTER_X: int = SCREEN_WIDTH // 2
@@ -26,7 +28,9 @@ FRAMES_PER_SECOND: float = 60.0
 GAME_TITLE: str = "Village Simulator"
 GAME_ICON: str = ASSETS_PATH + "icon.png"
 INITIAL_MAP: str = "Village Mist - Rydia's House"
-BACKGROUND_COLOR: pygame.Color = pygame.Color(48, 48, 48)
+
+class Colors:
+    BACKGROUND: pygame.Color = pygame.Color(48, 48, 48)
 
 
 def scroll_into_view(screen: pygame.Surface, frame_timer: pygame.time.Clock, map_manager: MapManager, player_rect: pygame.Rect):
@@ -42,26 +46,35 @@ def scroll_into_view(screen: pygame.Surface, frame_timer: pygame.time.Clock, map
     :type map_manager: MapManager
     :type player_rect: pygame.Rect
     """
-    global SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_CENTER_X, BACKGROUND_COLOR, FRAMES_PER_SECOND
+    global SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_CENTER_X, FRAMES_PER_SECOND
     CURTAIN_SPEED: int = 8
     offset: int = 0
     while offset < SCREEN_WIDTH // 2:
-        screen.fill(BACKGROUND_COLOR)
+        screen.fill(Colors.BACKGROUND)
         map_manager.render_under_sprites(screen, player_rect.x, player_rect.y)
         map_manager.render_over_sprites(screen, player_rect.x, player_rect.y)
-        pygame.draw.rect(screen, BACKGROUND_COLOR, (0, 0, SCREEN_CENTER_X - offset, SCREEN_HEIGHT), 0)
-        pygame.draw.rect(screen, BACKGROUND_COLOR, (SCREEN_CENTER_X + offset, 0, SCREEN_WIDTH, SCREEN_HEIGHT), 0)
+        pygame.draw.rect(screen, Colors.BACKGROUND, (0, 0, SCREEN_CENTER_X - offset, SCREEN_HEIGHT), 0)
+        pygame.draw.rect(screen, Colors.BACKGROUND, (SCREEN_CENTER_X + offset, 0, SCREEN_WIDTH, SCREEN_HEIGHT), 0)
         pygame.display.flip()
         frame_timer.tick(FRAMES_PER_SECOND)
         offset += CURTAIN_SPEED
 
 
-pygame.init()
-screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
-pygame.display.set_caption(GAME_TITLE)
-pygame.display.set_icon(pygame.image.load(GAME_ICON))
+def blit_map():
+    """Draw the game board."""
+    global screen, hud, map_manager, player
 
-map_manager = MapManager(INITIAL_MAP)
+    screen.fill(Colors.BACKGROUND)
+    map_manager.render_under_sprites(screen, player.character.rect.x, player.character.rect.y)
+
+    for npc in map_manager.characters:
+        npc.character.blit(screen, map_manager, player.character.rect)
+
+    player.character.blit(screen, map_manager, player.character.rect)
+
+    map_manager.render_over_sprites(screen, player.character.rect.x, player.character.rect.y)
+
+    hud.blit(map_manager)
 
 
 class Player(Character):
@@ -81,69 +94,69 @@ class PlayerController(CharacterController):
         self.running_speed = 2
         self.selected_slot = 0
 
-    def update(self, map_manager: MapManager):
-        super().update(map_manager)
+    def update(self, map_manager: MapManager, hud):
+        super().update(map_manager, hud)
 
         key_state = pygame.key.get_pressed()
 
-        if key_state[pygame.K_LSHIFT] == 1:
+        if key_state[pygame.K_LSHIFT]:
             self.character.speed = self.running_speed
         else:
             self.character.speed = self.walking_speed
 
-        if key_state[pygame.K_w] == 1:
+        if key_state[pygame.K_w]:
             self.character.move_north(map_manager)
-        elif key_state[pygame.K_s] == 1:
+        elif key_state[pygame.K_s]:
             self.character.move_south(map_manager)
-        elif key_state[pygame.K_a] == 1:
+        elif key_state[pygame.K_a]:
             self.character.move_west(map_manager)
-        elif key_state[pygame.K_d] == 1:
+        elif key_state[pygame.K_d]:
             self.character.move_east(map_manager)
-        elif key_state[pygame.K_z] == 1:
+        elif key_state[pygame.K_z]:
             self.character.sprite.animations.set_current(ANIM_RAISE_HAND)
-        elif key_state[pygame.K_x] == 1:
+        elif key_state[pygame.K_x]:
             self.character.sprite.animations.set_current(ANIM_WAVE)
-        elif key_state[pygame.K_c] == 1:
+        elif key_state[pygame.K_c]:
             self.character.sprite.animations.set_current(ANIM_SAD)
-        elif key_state[pygame.K_v] == 1:
+        elif key_state[pygame.K_v]:
             self.character.sprite.animations.set_current(ANIM_NOD)
-        elif key_state[pygame.K_b] == 1:
+        elif key_state[pygame.K_b]:
             self.character.sprite.animations.set_current(ANIM_DIE)
-        elif key_state[pygame.K_SPACE] == 1:
-            self.touch(map_manager, self.character.facing_direction)
+        elif key_state[pygame.K_SPACE]:
+            self.touch(map_manager)
 
-        elif key_state[pygame.K_1] == 1:
+        elif key_state[pygame.K_1]:
             self.selected_slot = 1
-        elif key_state[pygame.K_2] == 1:
+        elif key_state[pygame.K_2]:
             self.selected_slot = 2
-        elif key_state[pygame.K_3] == 1:
+        elif key_state[pygame.K_3]:
             self.selected_slot = 3
-        elif key_state[pygame.K_4] == 1:
+        elif key_state[pygame.K_4]:
             self.selected_slot = 4
-        elif key_state[pygame.K_5] == 1:
+        elif key_state[pygame.K_5]:
             self.selected_slot = 5
-        elif key_state[pygame.K_6] == 1:
+        elif key_state[pygame.K_6]:
             self.selected_slot = 6
-        elif key_state[pygame.K_7] == 1:
+        elif key_state[pygame.K_7]:
             self.selected_slot = 7
-        elif key_state[pygame.K_8] == 1:
+        elif key_state[pygame.K_8]:
             self.selected_slot = 8
-        elif key_state[pygame.K_9] == 1:
+        elif key_state[pygame.K_9]:
             self.selected_slot = 9
-        elif key_state[pygame.K_0] == 1:
+        elif key_state[pygame.K_0]:
             self.selected_slot = 0
 
         else:
             # No key was pressed, so no longer moving.
             self.character.stop_moving()
 
-    def touch(self, map_manager, direction):
-        TOUCH_DISTANCE = 1
-        TILE_SIZE = 16
-        PIXEL_DISTANCE = int(RENDER_SCALE * TILE_SIZE * TOUCH_DISTANCE)
+    def touch(self, map_manager: MapManager):
+        TOUCH_DISTANCE: int = 1
+        TILE_SIZE: int = 16
+        PIXEL_DISTANCE: int = int(RENDER_SCALE * TILE_SIZE * TOUCH_DISTANCE)
 
-        delta_x = 0
-        delta_y = 0
+        delta_x: int = 0
+        delta_y: int = 0
         if self.character.facing_direction == NORTH:
             delta_y = -1
         elif self.character.facing_direction == SOUTH:
@@ -153,17 +166,17 @@ class PlayerController(CharacterController):
         elif self.character.facing_direction == EAST:
             delta_x = 1
 
-        center_x = self.character.rect.x + self.character.rect.width // 2
-        center_y = self.character.rect.y + self.character.rect.height // 2
+        center_x: int = self.character.rect.x + self.character.rect.width // 2
+        center_y: int = self.character.rect.y + self.character.rect.height // 2
 
-        start_x = center_x + delta_x * (self.character.rect.width // 2)
-        start_y = center_y + delta_y * (self.character.rect.height // 2)
+        start_x: int = center_x + delta_x * (self.character.rect.width // 2)
+        start_y: int = center_y + delta_y * (self.character.rect.height // 2)
 
         for n in range(0, PIXEL_DISTANCE, 8):
-            touchpoint_found = False
+            touchpoint_found: bool = False
             for npc in map_manager.characters:
-                test_x = start_x + delta_x * n
-                test_y = start_y + delta_y * n
+                test_x: int = start_x + delta_x * n
+                test_y: int = start_y + delta_y * n
                 if npc.character.rect.inflate(-1, -1).collidepoint(test_x, test_y):
                     npc.character.events.append(CharacterTouchedEvent(self.character))
                     touchpoint_found = True
@@ -172,10 +185,183 @@ class PlayerController(CharacterController):
                 break
 
 
-player = PlayerController(map_manager.spawn_point)
+class HUDElement:
+    def __init__(self):
+        self.rect = pygame.Rect(0, 0, 0, 0)
 
-hud_font = pygame.font.SysFont("Comic Sans MS", 16)  # , bold=True)
-tiny_font = pygame.font.SysFont("Comic Sans MS", 8)
+    def update(self):
+        pass
+
+    def blit(self, dst_surface):
+        pass
+
+
+class HUDHotKeySlot(HUDElement):
+    TEXT: pygame.Color = pygame.Color(255, 255, 192)
+    BORDER: pygame.Color = pygame.Color(255, 255, 255)
+    BACKGROUND: pygame.Color = pygame.Color(0, 0, 0)
+    BORDER_SELECTED: pygame.Color = pygame.Color(0, 0, 127)
+    BACKGROUND_SELECTED: pygame.Color = pygame.Color(255, 0, 0)
+    TINY_FONT = pygame.font.SysFont("Comic Sans MS", 8, bold=True)
+
+    def __init__(self, key):
+        hotkey_size = 18 * RENDER_SCALE
+        num_hotkeys = 10
+        offset = (SCREEN_WIDTH - num_hotkeys * (hotkey_size + RENDER_SCALE)) // 2
+        index = (key - 1) % 10
+        self.rect = pygame.Rect(offset + index * (hotkey_size + RENDER_SCALE),
+                                SCREEN_HEIGHT - hotkey_size - RENDER_SCALE,
+                                hotkey_size, hotkey_size)
+        self.key = key
+        self.is_selected = False
+
+    def update(self):
+        global player
+        self.is_selected = (player.selected_slot == self.key)
+
+    def blit(self, dst_surface):
+        if self.is_selected:
+            pygame.draw.rect(dst_surface, HUDHotKeySlot.BORDER_SELECTED,
+                             self.rect.inflate(-RENDER_SCALE, -RENDER_SCALE))
+            pygame.draw.rect(dst_surface, HUDHotKeySlot.BACKGROUND_SELECTED, self.rect, RENDER_SCALE)
+        else:
+            pygame.draw.rect(dst_surface, HUDHotKeySlot.BACKGROUND,
+                             self.rect.inflate(-RENDER_SCALE, -RENDER_SCALE))
+            pygame.draw.rect(dst_surface, HUDHotKeySlot.BORDER, self.rect, RENDER_SCALE)
+        dst_surface.blit(HUDHotKeySlot.TINY_FONT.render(str(self.key), True, HUDHotKeySlot.TEXT), (self.rect.x + 3, self.rect.y + 1))
+
+
+class HUDLabel(HUDElement):
+    FONT = pygame.font.SysFont("Comic Sans MS", 16)  # , bold=True)
+
+    def __init__(self, x, y, text):
+        super().__init__()
+
+        self.__text = None
+        self.__text_surface = None
+
+        self.position = (x, y)
+        self.color = pygame.Color(255, 255, 255)
+        self.set_text(text)
+
+    def update(self):
+        global map_manager
+        self.set_text(map_manager.map_name)
+
+    def blit(self, dst_surface):
+        dst_surface.blit(self.__text_surface, self.position)
+
+    def set_text(self, text):
+        self.__text = text
+        self.__text_surface = HUDLabel.FONT.render(self.__text, True, self.color)
+
+class HUDManager:
+    MESSAGEBOX_WIDTH: int = 19
+    MESSAGEBOX_HEIGHT: int = 6
+    TEXT_COLOR: pygame.Color = pygame.Color(255, 255, 255)
+
+    def __init__(self, screen):
+        self.screen = screen
+        self.window_tiles = TileSet("./assets/ui/window_tiles.png", 3, 3)
+        self.window_tiles.scale(RENDER_SCALE)
+        self.hud_font = pygame.font.SysFont("Comic Sans MS", 16)  # , bold=True)
+
+        self.elements = list()
+        self.elements.append(HUDLabel(16, 16, "Map Name"))
+        self.elements.append(HUDHotKeySlot(1))
+        self.elements.append(HUDHotKeySlot(2))
+        self.elements.append(HUDHotKeySlot(3))
+        self.elements.append(HUDHotKeySlot(4))
+        self.elements.append(HUDHotKeySlot(5))
+        self.elements.append(HUDHotKeySlot(6))
+        self.elements.append(HUDHotKeySlot(7))
+        self.elements.append(HUDHotKeySlot(8))
+        self.elements.append(HUDHotKeySlot(9))
+        self.elements.append(HUDHotKeySlot(0))
+
+    def update(self):
+        for element in self.elements:
+            element.update()
+
+    def blit(self, map_manager: MapManager):
+        """Draw the heads-up display."""
+        for element in self.elements:
+            element.blit(self.screen)
+
+    def blit_messagebox(self, window_position):
+        window_left: int = window_position[0]
+        window_right: int = window_left + self.window_tiles.tile_width * HUDManager.MESSAGEBOX_WIDTH
+        window_top: int = window_position[1]
+        window_bottom: int = window_top + self.window_tiles.tile_height * HUDManager.MESSAGEBOX_HEIGHT
+
+        self.window_tiles.blit(self.screen, 0, window_left, window_top)
+        self.window_tiles.blit(self.screen, 2, window_right, window_top)
+        self.window_tiles.blit(self.screen, 6, window_left, window_bottom)
+        self.window_tiles.blit(self.screen, 8, window_right, window_bottom)
+        for x in range(HUDManager.MESSAGEBOX_WIDTH - 1):
+            offset = self.window_tiles.tile_width * (1 + x)
+            self.window_tiles.blit(self.screen, 1, window_left + offset, window_top)
+            self.window_tiles.blit(self.screen, 7, window_left + offset, window_bottom)
+        for y in range(HUDManager.MESSAGEBOX_HEIGHT - 1):
+            offset = self.window_tiles.tile_height * (1 + y)
+            self.window_tiles.blit(self.screen, 3, window_left, window_top + offset)
+            self.window_tiles.blit(self.screen, 5, window_right, window_top + offset)
+        for y in range(1, HUDManager.MESSAGEBOX_HEIGHT):
+            for x in range(1, HUDManager.MESSAGEBOX_WIDTH):
+                offset_x = self.window_tiles.tile_width * x
+                offset_y = self.window_tiles.tile_height * y
+                self.window_tiles.blit(self.screen, 4, window_left + offset_x, window_top + offset_y)
+
+    # I don't like how this disables the main loop.
+    def show_message(self, text: str):
+        animate_speed = 50
+        window_position = (0, 0)
+        text_position = (window_position[0] + self.window_tiles.tile_width,
+                         window_position[1] + self.window_tiles.tile_height)
+
+        is_showing_message = True
+        frame_timer = pygame.time.Clock()
+        last_animate_time = pygame.time.get_ticks()
+        displayed_message = ""
+        continue_text = self.hud_font.render("Press <Space> to continue.", True, (255, 255, 192))
+        show_continue_message = False
+        while is_showing_message:
+            for event in pygame.event.get():
+                if event.type == pygame.KEYUP and event.key == pygame.K_SPACE and len(text) == 0:
+                    is_showing_message = False
+
+            # Animate the text.
+            if pygame.time.get_ticks() - last_animate_time > animate_speed:
+                last_animate_time = pygame.time.get_ticks()
+                if len(text) > 0:
+                    displayed_message = displayed_message + text[0]
+                    text = text[1:]
+                    if len(text) == 0:
+                        animate_speed = 500
+                else:
+                    show_continue_message = not show_continue_message
+
+            # Render the screen.
+            blit_map()
+            self.blit_messagebox(window_position)
+            self.screen.blit(self.hud_font.render(displayed_message, True, HUDManager.TEXT_COLOR), text_position)
+            if len(text) == 0 and show_continue_message:
+                self.screen.blit(continue_text, (
+                    window_position[0] + self.window_tiles.tile_width * HUDManager.MESSAGEBOX_WIDTH - continue_text.get_width(),
+                    window_position[1] + self.window_tiles.tile_height * HUDManager.MESSAGEBOX_HEIGHT - continue_text.get_height()
+                ))
+            pygame.display.flip()
+            frame_timer.tick(FRAMES_PER_SECOND)
+
+
+screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
+pygame.display.set_caption(GAME_TITLE)
+pygame.display.set_icon(pygame.image.load(GAME_ICON))
+
+map_manager = MapManager(INITIAL_MAP)
+
+hud = HUDManager(screen)
+player = PlayerController(map_manager.spawn_point)
 
 frame_timer = pygame.time.Clock()
 
@@ -194,7 +380,9 @@ while is_playing:
 
     is_paused = not pygame.key.get_focused()
 
-    player.update(map_manager)
+    hud.update()
+
+    player.update(map_manager, hud)
 
     # Check for player intersection with transition objects.
     for transition in map_manager.transitions:
@@ -206,33 +394,10 @@ while is_playing:
 
     map_manager.update_animations()
 
-    # Draw the game board.
-    screen.fill(BACKGROUND_COLOR)
-    map_manager.render_under_sprites(screen, player.character.rect.x, player.character.rect.y)
-
     for npc in map_manager.characters:
-        npc.update(map_manager)
-        npc.character.blit(screen, map_manager, player.character.rect)
+        npc.update(map_manager, hud)
 
-    player.character.blit(screen, map_manager, player.character.rect)
-
-    map_manager.render_over_sprites(screen, player.character.rect.x, player.character.rect.y)
-
-    # Draw the user interface.
-    screen.blit(hud_font.render(map_manager.map_name, True, [255, 255, 255]), (16, 16))
-    hotkey_size = 18 * RENDER_SCALE
-    hotkeys = (1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
-    offset = (SCREEN_WIDTH - len(hotkeys) * (hotkey_size + RENDER_SCALE)) // 2
-    for n in range(len(hotkeys)):
-        hotkey_rect = pygame.Rect(offset + n * (hotkey_size + RENDER_SCALE), SCREEN_HEIGHT - hotkey_size - RENDER_SCALE,
-                                  hotkey_size, hotkey_size)
-        if player.selected_slot == hotkeys[n]:
-            pygame.draw.rect(screen, [0, 0, 127], hotkey_rect.inflate(-RENDER_SCALE, -RENDER_SCALE))
-            pygame.draw.rect(screen, [255, 0, 0], hotkey_rect, RENDER_SCALE)
-        else:
-            pygame.draw.rect(screen, [0, 0, 0], hotkey_rect.inflate(-RENDER_SCALE, -RENDER_SCALE))
-            pygame.draw.rect(screen, [255, 255, 255], hotkey_rect, RENDER_SCALE)
-        screen.blit(tiny_font.render(str(hotkeys[n]), True, [255, 255, 192]), (hotkey_rect.x + 3, hotkey_rect.y + 1))
+    blit_map()
 
     pygame.display.flip()
 

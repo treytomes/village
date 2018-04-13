@@ -2,11 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0079dedb-902e-4c13-a2d3-7d46fb355d5b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/GeorgeTomes.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/village.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/village.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/ui/windows_tiles.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/ui/window_tiles.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/npc1.py" beforeDir="false" afterPath="$PROJECT_DIR$/npc1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/npc2.py" beforeDir="false" afterPath="$PROJECT_DIR$/npc2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pytmx.py" beforeDir="false" afterPath="$PROJECT_DIR$/pytmx.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/village.py" beforeDir="false" afterPath="$PROJECT_DIR$/village.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/villagelib/Character.py" beforeDir="false" afterPath="$PROJECT_DIR$/villagelib/Character.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/villagelib/CharacterController.py" beforeDir="false" afterPath="$PROJECT_DIR$/villagelib/CharacterController.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/villagelib/CharacterEvent.py" beforeDir="false" afterPath="$PROJECT_DIR$/villagelib/CharacterEvent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/villagelib/ScriptedCharacter.py" beforeDir="false" afterPath="$PROJECT_DIR$/villagelib/ScriptedCharacter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/villagelib/ScriptedCharacterController.py" beforeDir="false" afterPath="$PROJECT_DIR$/villagelib/ScriptedCharacterController.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/villagelib/TileSet.py" beforeDir="false" afterPath="$PROJECT_DIR$/villagelib/TileSet.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,10 +27,59 @@
       <file leaf-file-name="village.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/village.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="100" column="16" lean-forward="true" selection-start-line="100" selection-start-column="16" selection-end-line="100" selection-end-column="16" />
+            <state relative-caret-position="148">
+              <caret line="346" column="96" selection-start-line="346" selection-start-column="86" selection-end-line="346" selection-end-column="96" />
               <folding>
                 <element signature="e#700#724#0" expanded="true" />
+                <element signature="e#7169#8749#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="npc1.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/npc1.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="257">
+              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="npc2.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/npc2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="24" column="10" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CharacterController.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/villagelib/CharacterController.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-16">
+              <caret line="19" column="46" lean-forward="true" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TileSet.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/villagelib/TileSet.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-115">
+              <caret line="17" column="103" selection-start-line="17" selection-start-column="103" selection-end-line="17" selection-end-column="103" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Character.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/villagelib/Character.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="101" column="69" selection-start-line="101" selection-start-column="69" selection-end-line="101" selection-end-column="69" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -34,7 +90,16 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>frame_timer</find>
+      <find>touch</find>
       <find>BACKGROUND_COLOR</find>
+      <find>touched_by</find>
+      <find>Event</find>
+      <find>update</find>
+      <find>hud</find>
+      <find>map</find>
+      <find>six.</find>
+      <find>tiny_font</find>
+      <find>TEXT_COLOR</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -44,14 +109,24 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/villagelib/__init__.py" />
+        <option value="$PROJECT_DIR$/villagelib/TileSet.py" />
+        <option value="$PROJECT_DIR$/villagelib/CharacterEvent.py" />
+        <option value="$PROJECT_DIR$/villagelib/Character.py" />
+        <option value="$PROJECT_DIR$/villagelib/ScriptedCharacterController.py" />
+        <option value="$PROJECT_DIR$/villagelib/ScriptedCharacter.py" />
+        <option value="$PROJECT_DIR$/villagelib/CharacterController.py" />
+        <option value="$PROJECT_DIR$/npc1.py" />
+        <option value="$PROJECT_DIR$/npc2.py" />
+        <option value="$USER_HOME$/.PyCharmCE2018.1/system/python_stubs/1585564554/pygame/surface.py" />
+        <option value="$PROJECT_DIR$/pytmx.py" />
         <option value="$PROJECT_DIR$/village.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="216" />
-    <option name="y" value="99" />
-    <option name="width" value="1600" />
+    <option name="x" value="73" />
+    <option name="y" value="104" />
+    <option name="width" value="1722" />
     <option name="height" value="875" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -68,11 +143,6 @@
               <item name="village" type="b2602c69:ProjectViewProjectNode" />
               <item name="village" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="village" type="b2602c69:ProjectViewProjectNode" />
-              <item name="village" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -80,7 +150,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -130,35 +200,54 @@
       <option name="presentableId" value="Default" />
       <updated>1523625784852</updated>
     </task>
+    <task id="LOCAL-00001" summary="Add comments.">
+      <created>1523633955311</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1523633955311</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="216" y="99" width="1600" height="875" extended-state="0" />
+    <frame x="73" y="104" width="1722" height="875" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2588384" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24032825" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.5302632" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.21973684" />
+      <window_info anchor="bottom" id="Python Console" order="7" weight="0.30393198" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.31710526" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.32306057" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.17747077" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add comments." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add comments." />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
       <option name="time" value="1" />
     </breakpoint-manager>
   </component>
@@ -169,6 +258,7 @@
           <caret line="67" column="34" selection-start-line="67" selection-start-column="34" selection-end-line="67" selection-end-column="34" />
           <folding>
             <element signature="e#700#724#0" expanded="true" />
+            <element signature="e#7169#8749#0" />
           </folding>
         </state>
       </provider>
@@ -179,6 +269,7 @@
           <caret line="12" selection-start-line="12" selection-end-line="12" />
           <folding>
             <element signature="e#700#724#0" expanded="true" />
+            <element signature="e#7169#8749#0" />
           </folding>
         </state>
       </provider>
@@ -189,6 +280,7 @@
           <caret line="12" selection-start-line="12" selection-end-line="12" />
           <folding>
             <element signature="e#700#724#0" expanded="true" />
+            <element signature="e#7169#8749#0" />
           </folding>
         </state>
       </provider>
@@ -213,6 +305,7 @@
           <caret line="12" selection-start-line="12" selection-end-line="12" />
           <folding>
             <element signature="e#700#724#0" expanded="true" />
+            <element signature="e#7169#8749#0" />
           </folding>
         </state>
       </provider>
@@ -223,6 +316,7 @@
           <caret line="25" column="44" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
           <folding>
             <element signature="e#700#724#0" expanded="true" />
+            <element signature="e#7169#8749#0" />
           </folding>
         </state>
       </provider>
@@ -233,6 +327,7 @@
           <caret line="34" column="78" selection-start-line="34" selection-start-column="78" selection-end-line="34" selection-end-column="78" />
           <folding>
             <element signature="e#700#724#0" expanded="true" />
+            <element signature="e#7169#8749#0" />
           </folding>
         </state>
       </provider>
@@ -243,6 +338,7 @@
           <caret line="12" selection-start-line="12" selection-end-line="12" />
           <folding>
             <element signature="e#700#724#0" expanded="true" />
+            <element signature="e#7169#8749#0" />
           </folding>
         </state>
       </provider>
@@ -271,12 +367,109 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/villagelib/Sprite.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/villagelib/ScriptedCharacterController.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="15" column="67" lean-forward="true" selection-start-line="15" selection-start-column="67" selection-end-line="15" selection-end-column="67" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/villagelib/ScriptedCharacter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/villagelib/CharacterEvent.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="36" lean-forward="true" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/villagelib/AnimationSet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="54" column="75" lean-forward="true" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/npc1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/npc2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="10" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharmCE2018.1/system/python_stubs/1585564554/pygame/surface.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="7" lean-forward="true" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pytmx.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/villagelib/Character.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="101" column="69" selection-start-line="101" selection-start-column="69" selection-end-line="101" selection-end-column="69" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/villagelib/TileSet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-115">
+          <caret line="17" column="103" selection-start-line="17" selection-start-column="103" selection-end-line="17" selection-end-column="103" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/villagelib/CharacterController.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-16">
+          <caret line="19" column="46" lean-forward="true" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/village.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="100" column="16" lean-forward="true" selection-start-line="100" selection-start-column="16" selection-end-line="100" selection-end-column="16" />
+        <state relative-caret-position="148">
+          <caret line="346" column="96" selection-start-line="346" selection-start-column="86" selection-end-line="346" selection-end-column="96" />
           <folding>
             <element signature="e#700#724#0" expanded="true" />
+            <element signature="e#7169#8749#0" />
           </folding>
         </state>
       </provider>
