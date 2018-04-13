@@ -1,44 +1,59 @@
 # Useful references:
 #   https://www.pygame.org/docs/ref/display.html
 #   https://www.pygame.org/project-Tiled+TMX+Loader-2036-.html
-#	Final Fantasy 6 Sprites: https://www.spriters-resource.com/snes/ff6/
-#	Final Fantasy 4 Sprites: https://www.spriters-resource.com/snes/ff4
-#	More Final Fantasy 4 Sprites: http://www.videogamesprites.net/FinalFantasy4/
+#   Final Fantasy 6 Sprites: https://www.spriters-resource.com/snes/ff6/
+#   Final Fantasy 4 Sprites: https://www.spriters-resource.com/snes/ff4
+#   More Final Fantasy 4 Sprites: http://www.videogamesprites.net/FinalFantasy4/
 #   https://docs.python.org/3/library/enum.html
 #
-#	Tiled Map Editor documentation: http://docs.mapeditor.org/en/latest/
-#	PyTMX GitHub: https://github.com/bitcraft/PyTMX
+#   Tiled Map Editor documentation: http://docs.mapeditor.org/en/latest/
+#   PyTMX GitHub: https://github.com/bitcraft/PyTMX
 # Also:
 #   pip install pytmx
+# Note: Rather than using the pytmx package, I copied the source files locally.
+# The package was missing some features that I needed.
 
 from villagelib import *
 
 # TODO: Rename npc_male_1.py to npc_templates.py?
 import sprites
 
-SCREEN_WIDTH = 640
-SCREEN_HEIGHT = 480
-SCREEN_CENTER_X = SCREEN_WIDTH // 2
-SCREEN_CENTER_Y = SCREEN_HEIGHT // 2
-FRAMES_PER_SECOND = 60.0
-GAME_TITLE = "Village Simulator"
-GAME_ICON = ASSETS_PATH + "icon.png"
-INITIAL_MAP = "Village Mist - Rydia's House"
-BACKGROUND_COLOR = [48, 48, 48]
+SCREEN_WIDTH: int = 640
+SCREEN_HEIGHT: int = 480
+SCREEN_CENTER_X: int = SCREEN_WIDTH // 2
+SCREEN_CENTER_Y: int = SCREEN_HEIGHT // 2
+FRAMES_PER_SECOND: float = 60.0
+GAME_TITLE: str = "Village Simulator"
+GAME_ICON: str = ASSETS_PATH + "icon.png"
+INITIAL_MAP: str = "Village Mist - Rydia's House"
+BACKGROUND_COLOR: pygame.Color = pygame.Color(48, 48, 48)
 
 
-def scroll_into_view(screen, frame_timer, map_manager, player_rect):
-    """Open the screen with a stage-curtain effect."""
-    offset = 0
+def scroll_into_view(screen: pygame.Surface, frame_timer: pygame.time.Clock, map_manager: MapManager, player_rect: pygame.Rect):
+    """Open the screen with a stage-curtain effect.
+
+    :param screen: A reference to the screen the game is being rendered on.
+    :param frame_timer: The clock object used to throttle the framerate.
+    :param map_manager: The map being rendered.
+    :param player_rect: The location and size of the player to center the map on.
+
+    :type screen: pygame.Surface
+    :type frame_timer: pygame.time.Clock
+    :type map_manager: MapManager
+    :type player_rect: pygame.Rect
+    """
+    global SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_CENTER_X, BACKGROUND_COLOR, FRAMES_PER_SECOND
+    CURTAIN_SPEED: int = 8
+    offset: int = 0
     while offset < SCREEN_WIDTH // 2:
-        screen.fill([48, 48, 48])
+        screen.fill(BACKGROUND_COLOR)
         map_manager.render_under_sprites(screen, player_rect.x, player_rect.y)
         map_manager.render_over_sprites(screen, player_rect.x, player_rect.y)
-        pygame.draw.rect(screen, (48, 48, 48), (0, 0, SCREEN_WIDTH // 2 - offset, SCREEN_HEIGHT), 0)
-        pygame.draw.rect(screen, (48, 48, 48), (SCREEN_WIDTH // 2 + offset, 0, SCREEN_WIDTH, SCREEN_HEIGHT), 0)
+        pygame.draw.rect(screen, BACKGROUND_COLOR, (0, 0, SCREEN_CENTER_X - offset, SCREEN_HEIGHT), 0)
+        pygame.draw.rect(screen, BACKGROUND_COLOR, (SCREEN_CENTER_X + offset, 0, SCREEN_WIDTH, SCREEN_HEIGHT), 0)
         pygame.display.flip()
         frame_timer.tick(FRAMES_PER_SECOND)
-        offset += 8
+        offset += CURTAIN_SPEED
 
 
 pygame.init()
@@ -66,7 +81,7 @@ class PlayerController(CharacterController):
         self.running_speed = 2
         self.selected_slot = 0
 
-    def update(self, map_manager):
+    def update(self, map_manager: MapManager):
         super().update(map_manager)
 
         key_state = pygame.key.get_pressed()
