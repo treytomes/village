@@ -16,6 +16,10 @@ palette = (
 name = "Peter"
 
 
+def on_create(self):
+    self.character.face_east()
+
+
 def on_collided(self, collided_by, delta_x, delta_y):
     print(f"{self.character.name} collided: ({collided_by.name}, {delta_x}, {delta_y})")
 

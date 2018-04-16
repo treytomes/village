@@ -2,18 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0079dedb-902e-4c13-a2d3-7d46fb355d5b" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/npc_innkeeper.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/npc_rydia.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/GeorgeTomes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/GeorgeTomes.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/ui/windows_tiles.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/ui/window_tiles.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/maps/Village Mist - Inn.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/maps/Village Mist - Inn.tmx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/maps/Village Mist - Rydia's House.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/maps/Village Mist - Rydia's House.tmx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/npc1.py" beforeDir="false" afterPath="$PROJECT_DIR$/npc1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/npc2.py" beforeDir="false" afterPath="$PROJECT_DIR$/npc2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pytmx.py" beforeDir="false" afterPath="$PROJECT_DIR$/pytmx.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprites.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprites.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/village.py" beforeDir="false" afterPath="$PROJECT_DIR$/village.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/villagelib/Character.py" beforeDir="false" afterPath="$PROJECT_DIR$/villagelib/Character.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/villagelib/CharacterController.py" beforeDir="false" afterPath="$PROJECT_DIR$/villagelib/CharacterController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/villagelib/CharacterEvent.py" beforeDir="false" afterPath="$PROJECT_DIR$/villagelib/CharacterEvent.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/villagelib/ScriptedCharacter.py" beforeDir="false" afterPath="$PROJECT_DIR$/villagelib/ScriptedCharacter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/villagelib/MapManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/villagelib/MapManager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/villagelib/ScriptedCharacterController.py" beforeDir="false" afterPath="$PROJECT_DIR$/villagelib/ScriptedCharacterController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/villagelib/TileSet.py" beforeDir="false" afterPath="$PROJECT_DIR$/villagelib/TileSet.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,60 +28,32 @@
       <file leaf-file-name="village.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/village.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="346" column="96" selection-start-line="346" selection-start-column="86" selection-end-line="346" selection-end-column="96" />
+            <state relative-caret-position="323">
+              <caret line="299" column="33" selection-start-line="299" selection-start-column="33" selection-end-line="299" selection-end-column="33" />
               <folding>
                 <element signature="e#700#724#0" expanded="true" />
-                <element signature="e#7169#8749#0" />
+                <element signature="e#1307#2467#0" />
+                <element signature="e#3027#3280#0" />
+                <element signature="e#3332#6973#0" />
+                <element signature="e#3373#3503#0" />
+                <element signature="e#3565#5571#0" />
+                <element signature="e#5627#6973#0" />
+                <element signature="e#6998#7144#0" />
+                <element signature="e#7184#8814#0" />
+                <element signature="e#8849#9477#0" />
+                <element signature="e#10553#12074#0" />
+                <element signature="e#10473#10531#0" />
+                <element signature="e#10586#10694#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="npc1.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/npc1.py">
+      <file leaf-file-name="sprites.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sprites.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="npc2.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/npc2.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" column="10" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CharacterController.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/villagelib/CharacterController.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-16">
-              <caret line="19" column="46" lean-forward="true" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TileSet.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/villagelib/TileSet.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-115">
-              <caret line="17" column="103" selection-start-line="17" selection-start-column="103" selection-end-line="17" selection-end-column="103" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Character.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/villagelib/Character.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="101" column="69" selection-start-line="101" selection-start-column="69" selection-end-line="101" selection-end-column="69" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="306">
+              <caret line="20" column="41" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -90,7 +63,6 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>frame_timer</find>
-      <find>touch</find>
       <find>BACKGROUND_COLOR</find>
       <find>touched_by</find>
       <find>Event</find>
@@ -99,7 +71,11 @@
       <find>map</find>
       <find>six.</find>
       <find>tiny_font</find>
+      <find>speak</find>
+      <find>touch</find>
       <find>TEXT_COLOR</find>
+      <find>is_showing_message</find>
+      <find>hud.blit</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -112,22 +88,26 @@
         <option value="$PROJECT_DIR$/villagelib/TileSet.py" />
         <option value="$PROJECT_DIR$/villagelib/CharacterEvent.py" />
         <option value="$PROJECT_DIR$/villagelib/Character.py" />
-        <option value="$PROJECT_DIR$/villagelib/ScriptedCharacterController.py" />
         <option value="$PROJECT_DIR$/villagelib/ScriptedCharacter.py" />
-        <option value="$PROJECT_DIR$/villagelib/CharacterController.py" />
-        <option value="$PROJECT_DIR$/npc1.py" />
-        <option value="$PROJECT_DIR$/npc2.py" />
         <option value="$USER_HOME$/.PyCharmCE2018.1/system/python_stubs/1585564554/pygame/surface.py" />
         <option value="$PROJECT_DIR$/pytmx.py" />
+        <option value="$PROJECT_DIR$/villagelib/MapManager.py" />
+        <option value="$PROJECT_DIR$/npc1.py" />
+        <option value="$PROJECT_DIR$/villagelib/CharacterController.py" />
+        <option value="$PROJECT_DIR$/villagelib/ScriptedCharacterController.py" />
+        <option value="$PROJECT_DIR$/npc2.py" />
+        <option value="$PROJECT_DIR$/npc_rydia.py" />
+        <option value="$PROJECT_DIR$/npc_innkeeper.py" />
+        <option value="$PROJECT_DIR$/sprites.py" />
         <option value="$PROJECT_DIR$/village.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="73" />
-    <option name="y" value="104" />
+    <option name="x" value="147" />
+    <option name="y" value="29" />
     <option name="width" value="1722" />
-    <option name="height" value="875" />
+    <option name="height" value="992" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -135,7 +115,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -143,14 +122,25 @@
               <item name="village" type="b2602c69:ProjectViewProjectNode" />
               <item name="village" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="village" type="b2602c69:ProjectViewProjectNode" />
+              <item name="village" type="462c0819:PsiDirectoryNode" />
+              <item name="villagelib" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\georgetomes\projects\how-to-program\village" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -207,19 +197,26 @@
       <option name="project" value="LOCAL" />
       <updated>1523633955311</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Add a way for NPCs to talk to the player, and begin building a UI framework.">
+      <created>1523656202705</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1523656202705</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="73" y="104" width="1722" height="875" extended-state="0" />
+    <frame x="147" y="29" width="1722" height="992" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24032825" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24032825" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.5302632" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Python Console" order="7" weight="0.30393198" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.31710526" />
+      <window_info anchor="bottom" id="Python Console" order="7" weight="0.322691" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2576967" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -230,6 +227,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.5302632" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -237,7 +235,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add comments." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add comments." />
+    <MESSAGE value="Add a way for NPCs to talk to the player, and begin building a UI framework." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add a way for NPCs to talk to the player, and begin building a UI framework." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -254,11 +253,82 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/village.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5882">
+          <caret line="346" column="96" selection-start-line="346" selection-start-column="86" selection-end-line="346" selection-end-column="96" />
+          <folding>
+            <element signature="e#700#724#0" expanded="true" />
+            <element signature="e#1307#2467#0" />
+            <element signature="e#3027#3280#0" />
+            <element signature="e#3332#6973#0" />
+            <element signature="e#3373#3503#0" />
+            <element signature="e#3565#5571#0" />
+            <element signature="e#5627#6973#0" />
+            <element signature="e#6998#7144#0" />
+            <element signature="e#7184#8814#0" />
+            <element signature="e#8849#9477#0" />
+            <element signature="e#10553#12074#0" />
+            <element signature="e#10473#10531#0" />
+            <element signature="e#10586#10694#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/npc1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/npc2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="10" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/villagelib/CharacterController.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="46" lean-forward="true" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/villagelib/TileSet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="103" selection-start-line="17" selection-start-column="103" selection-end-line="17" selection-end-column="103" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/villagelib/Character.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1649">
+          <caret line="101" column="69" selection-start-line="101" selection-start-column="69" selection-end-line="101" selection-end-column="69" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/village.py">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1139">
           <caret line="67" column="34" selection-start-line="67" selection-start-column="34" selection-end-line="67" selection-end-column="34" />
           <folding>
             <element signature="e#700#724#0" expanded="true" />
-            <element signature="e#7169#8749#0" />
+            <element signature="e#1307#2467#0" />
+            <element signature="e#3027#3280#0" />
+            <element signature="e#3332#6973#0" />
+            <element signature="e#3373#3503#0" />
+            <element signature="e#3565#5571#0" />
+            <element signature="e#5627#6973#0" />
+            <element signature="e#6998#7144#0" />
+            <element signature="e#7184#8814#0" />
+            <element signature="e#8849#9477#0" />
+            <element signature="e#10553#12074#0" />
+            <element signature="e#10473#10531#0" />
+            <element signature="e#10586#10694#0" />
           </folding>
         </state>
       </provider>
@@ -269,7 +339,18 @@
           <caret line="12" selection-start-line="12" selection-end-line="12" />
           <folding>
             <element signature="e#700#724#0" expanded="true" />
-            <element signature="e#7169#8749#0" />
+            <element signature="e#1307#2467#0" />
+            <element signature="e#3027#3280#0" />
+            <element signature="e#3332#6973#0" />
+            <element signature="e#3373#3503#0" />
+            <element signature="e#3565#5571#0" />
+            <element signature="e#5627#6973#0" />
+            <element signature="e#6998#7144#0" />
+            <element signature="e#7184#8814#0" />
+            <element signature="e#8849#9477#0" />
+            <element signature="e#10553#12074#0" />
+            <element signature="e#10473#10531#0" />
+            <element signature="e#10586#10694#0" />
           </folding>
         </state>
       </provider>
@@ -280,7 +361,18 @@
           <caret line="12" selection-start-line="12" selection-end-line="12" />
           <folding>
             <element signature="e#700#724#0" expanded="true" />
-            <element signature="e#7169#8749#0" />
+            <element signature="e#1307#2467#0" />
+            <element signature="e#3027#3280#0" />
+            <element signature="e#3332#6973#0" />
+            <element signature="e#3373#3503#0" />
+            <element signature="e#3565#5571#0" />
+            <element signature="e#5627#6973#0" />
+            <element signature="e#6998#7144#0" />
+            <element signature="e#7184#8814#0" />
+            <element signature="e#8849#9477#0" />
+            <element signature="e#10553#12074#0" />
+            <element signature="e#10473#10531#0" />
+            <element signature="e#10586#10694#0" />
           </folding>
         </state>
       </provider>
@@ -305,7 +397,18 @@
           <caret line="12" selection-start-line="12" selection-end-line="12" />
           <folding>
             <element signature="e#700#724#0" expanded="true" />
-            <element signature="e#7169#8749#0" />
+            <element signature="e#1307#2467#0" />
+            <element signature="e#3027#3280#0" />
+            <element signature="e#3332#6973#0" />
+            <element signature="e#3373#3503#0" />
+            <element signature="e#3565#5571#0" />
+            <element signature="e#5627#6973#0" />
+            <element signature="e#6998#7144#0" />
+            <element signature="e#7184#8814#0" />
+            <element signature="e#8849#9477#0" />
+            <element signature="e#10553#12074#0" />
+            <element signature="e#10473#10531#0" />
+            <element signature="e#10586#10694#0" />
           </folding>
         </state>
       </provider>
@@ -316,7 +419,18 @@
           <caret line="25" column="44" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
           <folding>
             <element signature="e#700#724#0" expanded="true" />
-            <element signature="e#7169#8749#0" />
+            <element signature="e#1307#2467#0" />
+            <element signature="e#3027#3280#0" />
+            <element signature="e#3332#6973#0" />
+            <element signature="e#3373#3503#0" />
+            <element signature="e#3565#5571#0" />
+            <element signature="e#5627#6973#0" />
+            <element signature="e#6998#7144#0" />
+            <element signature="e#7184#8814#0" />
+            <element signature="e#8849#9477#0" />
+            <element signature="e#10553#12074#0" />
+            <element signature="e#10473#10531#0" />
+            <element signature="e#10586#10694#0" />
           </folding>
         </state>
       </provider>
@@ -327,7 +441,18 @@
           <caret line="34" column="78" selection-start-line="34" selection-start-column="78" selection-end-line="34" selection-end-column="78" />
           <folding>
             <element signature="e#700#724#0" expanded="true" />
-            <element signature="e#7169#8749#0" />
+            <element signature="e#1307#2467#0" />
+            <element signature="e#3027#3280#0" />
+            <element signature="e#3332#6973#0" />
+            <element signature="e#3373#3503#0" />
+            <element signature="e#3565#5571#0" />
+            <element signature="e#5627#6973#0" />
+            <element signature="e#6998#7144#0" />
+            <element signature="e#7184#8814#0" />
+            <element signature="e#8849#9477#0" />
+            <element signature="e#10553#12074#0" />
+            <element signature="e#10473#10531#0" />
+            <element signature="e#10586#10694#0" />
           </folding>
         </state>
       </provider>
@@ -338,7 +463,18 @@
           <caret line="12" selection-start-line="12" selection-end-line="12" />
           <folding>
             <element signature="e#700#724#0" expanded="true" />
-            <element signature="e#7169#8749#0" />
+            <element signature="e#1307#2467#0" />
+            <element signature="e#3027#3280#0" />
+            <element signature="e#3332#6973#0" />
+            <element signature="e#3373#3503#0" />
+            <element signature="e#3565#5571#0" />
+            <element signature="e#5627#6973#0" />
+            <element signature="e#6998#7144#0" />
+            <element signature="e#7184#8814#0" />
+            <element signature="e#8849#9477#0" />
+            <element signature="e#10553#12074#0" />
+            <element signature="e#10473#10531#0" />
+            <element signature="e#10586#10694#0" />
           </folding>
         </state>
       </provider>
@@ -377,16 +513,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/villagelib/ScriptedCharacterController.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="15" column="67" lean-forward="true" selection-start-line="15" selection-start-column="67" selection-end-line="15" selection-end-column="67" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/villagelib/ScriptedCharacter.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
@@ -411,20 +537,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/npc1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/npc2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="10" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharmCE2018.1/system/python_stubs/1585564554/pygame/surface.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -439,37 +551,100 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/villagelib/TileSet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="103" selection-start-line="17" selection-start-column="103" selection-end-line="17" selection-end-column="103" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/villagelib/Character.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="101" column="69" selection-start-line="101" selection-start-column="69" selection-end-line="101" selection-end-column="69" />
+        <state relative-caret-position="465">
+          <caret line="166" column="59" lean-forward="true" selection-start-line="166" selection-start-column="8" selection-end-line="166" selection-end-column="59" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/villagelib/TileSet.py">
+    <entry file="file://$PROJECT_DIR$/villagelib/CharacterController.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-115">
-          <caret line="17" column="103" selection-start-line="17" selection-start-column="103" selection-end-line="17" selection-end-column="103" />
+        <state relative-caret-position="374">
+          <caret line="25" column="64" lean-forward="true" selection-start-line="25" selection-start-column="64" selection-end-line="25" selection-end-column="64" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/villagelib/CharacterController.py">
+    <entry file="file://$PROJECT_DIR$/villagelib/ScriptedCharacterController.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-16">
-          <caret line="19" column="46" lean-forward="true" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
+        <state relative-caret-position="293">
+          <caret line="33" column="44" selection-start-line="33" selection-start-column="44" selection-end-line="33" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/npc_rydia.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/npc2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="28" column="15" lean-forward="true" selection-start-line="28" selection-start-column="15" selection-end-line="28" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/villagelib/MapManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="73" column="54" lean-forward="true" selection-start-line="73" selection-start-column="54" selection-end-line="73" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/npc_innkeeper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="24" column="14" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/npc1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sprites.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="20" column="41" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/village.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="346" column="96" selection-start-line="346" selection-start-column="86" selection-end-line="346" selection-end-column="96" />
+        <state relative-caret-position="323">
+          <caret line="299" column="33" selection-start-line="299" selection-start-column="33" selection-end-line="299" selection-end-column="33" />
           <folding>
             <element signature="e#700#724#0" expanded="true" />
-            <element signature="e#7169#8749#0" />
+            <element signature="e#1307#2467#0" />
+            <element signature="e#3027#3280#0" />
+            <element signature="e#3332#6973#0" />
+            <element signature="e#3373#3503#0" />
+            <element signature="e#3565#5571#0" />
+            <element signature="e#5627#6973#0" />
+            <element signature="e#6998#7144#0" />
+            <element signature="e#7184#8814#0" />
+            <element signature="e#8849#9477#0" />
+            <element signature="e#10553#12074#0" />
+            <element signature="e#10473#10531#0" />
+            <element signature="e#10586#10694#0" />
           </folding>
         </state>
       </provider>

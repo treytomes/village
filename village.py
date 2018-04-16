@@ -15,7 +15,6 @@
 
 from villagelib import *
 
-# TODO: Rename npc_male_1.py to npc_templates.py?
 import sprites
 
 pygame.init()
@@ -27,7 +26,7 @@ SCREEN_CENTER_Y: int = SCREEN_HEIGHT // 2
 FRAMES_PER_SECOND: float = 60.0
 GAME_TITLE: str = "Village Simulator"
 GAME_ICON: str = ASSETS_PATH + "icon.png"
-INITIAL_MAP: str = "Village Mist - Rydia's House"
+INITIAL_MAP: str = "Village Mist - Inn"
 
 class Colors:
     BACKGROUND: pygame.Color = pygame.Color(48, 48, 48)
@@ -74,15 +73,14 @@ def blit_map():
 
     map_manager.render_over_sprites(screen, player.character.rect.x, player.character.rect.y)
 
-    hud.blit(map_manager)
+    hud.blit()
 
 
 class Player(Character):
     def __init__(self, spawn_point):
         super().__init__(spawn_point)
         self.name = "Player"
-        # self.load_sprite(sprites.npc_male_1)
-        self.load_sprite(sprites.rydia_old)
+        self.load_sprite(sprites.npc_male_3)
         self.can_slide = True
         self.is_pushable = False
 
@@ -151,7 +149,7 @@ class PlayerController(CharacterController):
             self.character.stop_moving()
 
     def touch(self, map_manager: MapManager):
-        TOUCH_DISTANCE: int = 1
+        TOUCH_DISTANCE: int = 1.5
         TILE_SIZE: int = 16
         PIXEL_DISTANCE: int = int(RENDER_SCALE * TILE_SIZE * TOUCH_DISTANCE)
 
@@ -196,6 +194,7 @@ class HUDElement:
         pass
 
 
+# TODO: Make the hotkey slots hold something.
 class HUDHotKeySlot(HUDElement):
     TEXT: pygame.Color = pygame.Color(255, 255, 192)
     BORDER: pygame.Color = pygame.Color(255, 255, 255)
@@ -255,16 +254,115 @@ class HUDLabel(HUDElement):
         self.__text = text
         self.__text_surface = HUDLabel.FONT.render(self.__text, True, self.color)
 
-class HUDManager:
-    MESSAGEBOX_WIDTH: int = 19
-    MESSAGEBOX_HEIGHT: int = 6
-    TEXT_COLOR: pygame.Color = pygame.Color(255, 255, 255)
 
-    def __init__(self, screen):
-        self.screen = screen
+class HUDMessageBox(HUDElement):
+    MESSAGEBOX_WIDTH = 19
+    MESSAGEBOX_HEIGHT = 6
+    TEXT_COLOR = pygame.Color(255, 255, 255)
+    TEXT_ANIMATE_SPEED = 50
+    BLINK_ANIMATE_SPEED = 500
+    CONTINUE_COLOR = pygame.Color(255, 255, 192)
+    CONTINUE_KEY = pygame.K_SPACE
+    CONTINUE_TEXT = f"Press <{pygame.key.name(CONTINUE_KEY)}> to continue."
+
+    def __init__(self):
         self.window_tiles = TileSet("./assets/ui/window_tiles.png", 3, 3)
         self.window_tiles.scale(RENDER_SCALE)
-        self.hud_font = pygame.font.SysFont("Comic Sans MS", 16)  # , bold=True)
+        self.window_position = (0, 0)
+        self.text_position = (self.window_position[0] + self.window_tiles.tile_width,
+                              self.window_position[1] + self.window_tiles.tile_height)
+        self.font = pygame.font.SysFont("Comic Sans MS", 16)  # , bold=True)
+        self.continue_text = self.font.render(HUDMessageBox.CONTINUE_TEXT, True, HUDMessageBox.CONTINUE_COLOR)
+        self.is_focused = False
+        self.message = ""
+        self.displayed_message = ""
+        self.show_continue_message = False
+        self.last_animate_time = 0
+        self.__key_state = dict()
+        self.__last_key_state = dict()
+
+    def __get_key_released(self, key):
+        try:
+            was_key_pressed = self.__last_key_state[key]
+        except KeyError:
+            was_key_pressed = False
+        try:
+            is_key_pressed = self.__key_state[key]
+        except KeyError:
+            is_key_pressed = False
+        return was_key_pressed and (not is_key_pressed)
+
+    def update(self):
+        if not self.is_focused:
+            return
+
+        # Check for key press.
+        if len(self.message) == 0:
+            self.__last_key_state = self.__key_state
+            self.__key_state = pygame.key.get_pressed()
+            if self.__get_key_released(HUDMessageBox.CONTINUE_KEY):
+                self.is_focused = False
+
+        # Animate the text.
+        if len(self.message) > 0:
+            if pygame.time.get_ticks() - self.last_animate_time > HUDMessageBox.TEXT_ANIMATE_SPEED:
+                self.last_animate_time = pygame.time.get_ticks()
+                self.displayed_message = self.displayed_message + self.message[0]
+                self.message = self.message[1:]
+        else:
+            if pygame.time.get_ticks() - self.last_animate_time > HUDMessageBox.BLINK_ANIMATE_SPEED:
+                self.last_animate_time = pygame.time.get_ticks()
+                self.show_continue_message = not self.show_continue_message
+
+    def blit(self, dst_surface):
+        if not self.is_focused:
+            return
+
+        self.blit_frame(dst_surface, self.window_position)
+        dst_surface.blit(self.font.render(self.displayed_message, True, HUDMessageBox.TEXT_COLOR), self.text_position)
+        if self.show_continue_message:
+            dst_surface.blit(self.continue_text, (
+                self.window_position[0] + self.window_tiles.tile_width * HUDMessageBox.MESSAGEBOX_WIDTH - self.continue_text.get_width(),
+                self.window_position[1] + self.window_tiles.tile_height * HUDMessageBox.MESSAGEBOX_HEIGHT - self.continue_text.get_height()
+            ))
+
+    def blit_frame(self, dst_surface, window_position):
+        window_left: int = window_position[0]
+        window_right: int = window_left + self.window_tiles.tile_width * HUDMessageBox.MESSAGEBOX_WIDTH
+        window_top: int = window_position[1]
+        window_bottom: int = window_top + self.window_tiles.tile_height * HUDMessageBox.MESSAGEBOX_HEIGHT
+
+        self.window_tiles.blit(dst_surface, 0, window_left, window_top)
+        self.window_tiles.blit(dst_surface, 2, window_right, window_top)
+        self.window_tiles.blit(dst_surface, 6, window_left, window_bottom)
+        self.window_tiles.blit(dst_surface, 8, window_right, window_bottom)
+        for x in range(HUDMessageBox.MESSAGEBOX_WIDTH - 1):
+            offset = self.window_tiles.tile_width * (1 + x)
+            self.window_tiles.blit(dst_surface, 1, window_left + offset, window_top)
+            self.window_tiles.blit(dst_surface, 7, window_left + offset, window_bottom)
+        for y in range(HUDMessageBox.MESSAGEBOX_HEIGHT - 1):
+            offset = self.window_tiles.tile_height * (1 + y)
+            self.window_tiles.blit(dst_surface, 3, window_left, window_top + offset)
+            self.window_tiles.blit(dst_surface, 5, window_right, window_top + offset)
+        for y in range(1, HUDMessageBox.MESSAGEBOX_HEIGHT):
+            for x in range(1, HUDMessageBox.MESSAGEBOX_WIDTH):
+                offset_x = self.window_tiles.tile_width * x
+                offset_y = self.window_tiles.tile_height * y
+                self.window_tiles.blit(dst_surface, 4, window_left + offset_x, window_top + offset_y)
+
+    def show_message(self, message):
+        print(f"[MESSAGE] {message}")
+        self.__key_state = dict()
+        self.__last_key_state = dict()
+        self.message = message
+        self.displayed_message = ""
+        self.is_focused = True
+
+
+class HUDManager:
+    def __init__(self, screen):
+        self.screen = screen
+        self.messagebox = HUDMessageBox()
 
         self.elements = list()
         self.elements.append(HUDLabel(16, 16, "Map Name"))
@@ -278,80 +376,20 @@ class HUDManager:
         self.elements.append(HUDHotKeySlot(8))
         self.elements.append(HUDHotKeySlot(9))
         self.elements.append(HUDHotKeySlot(0))
+        self.elements.append(self.messagebox)
 
     def update(self):
         for element in self.elements:
             element.update()
 
-    def blit(self, map_manager: MapManager):
+    def blit(self):
         """Draw the heads-up display."""
         for element in self.elements:
             element.blit(self.screen)
 
-    def blit_messagebox(self, window_position):
-        window_left: int = window_position[0]
-        window_right: int = window_left + self.window_tiles.tile_width * HUDManager.MESSAGEBOX_WIDTH
-        window_top: int = window_position[1]
-        window_bottom: int = window_top + self.window_tiles.tile_height * HUDManager.MESSAGEBOX_HEIGHT
-
-        self.window_tiles.blit(self.screen, 0, window_left, window_top)
-        self.window_tiles.blit(self.screen, 2, window_right, window_top)
-        self.window_tiles.blit(self.screen, 6, window_left, window_bottom)
-        self.window_tiles.blit(self.screen, 8, window_right, window_bottom)
-        for x in range(HUDManager.MESSAGEBOX_WIDTH - 1):
-            offset = self.window_tiles.tile_width * (1 + x)
-            self.window_tiles.blit(self.screen, 1, window_left + offset, window_top)
-            self.window_tiles.blit(self.screen, 7, window_left + offset, window_bottom)
-        for y in range(HUDManager.MESSAGEBOX_HEIGHT - 1):
-            offset = self.window_tiles.tile_height * (1 + y)
-            self.window_tiles.blit(self.screen, 3, window_left, window_top + offset)
-            self.window_tiles.blit(self.screen, 5, window_right, window_top + offset)
-        for y in range(1, HUDManager.MESSAGEBOX_HEIGHT):
-            for x in range(1, HUDManager.MESSAGEBOX_WIDTH):
-                offset_x = self.window_tiles.tile_width * x
-                offset_y = self.window_tiles.tile_height * y
-                self.window_tiles.blit(self.screen, 4, window_left + offset_x, window_top + offset_y)
-
     # I don't like how this disables the main loop.
     def show_message(self, text: str):
-        animate_speed = 50
-        window_position = (0, 0)
-        text_position = (window_position[0] + self.window_tiles.tile_width,
-                         window_position[1] + self.window_tiles.tile_height)
-
-        is_showing_message = True
-        frame_timer = pygame.time.Clock()
-        last_animate_time = pygame.time.get_ticks()
-        displayed_message = ""
-        continue_text = self.hud_font.render("Press <Space> to continue.", True, (255, 255, 192))
-        show_continue_message = False
-        while is_showing_message:
-            for event in pygame.event.get():
-                if event.type == pygame.KEYUP and event.key == pygame.K_SPACE and len(text) == 0:
-                    is_showing_message = False
-
-            # Animate the text.
-            if pygame.time.get_ticks() - last_animate_time > animate_speed:
-                last_animate_time = pygame.time.get_ticks()
-                if len(text) > 0:
-                    displayed_message = displayed_message + text[0]
-                    text = text[1:]
-                    if len(text) == 0:
-                        animate_speed = 500
-                else:
-                    show_continue_message = not show_continue_message
-
-            # Render the screen.
-            blit_map()
-            self.blit_messagebox(window_position)
-            self.screen.blit(self.hud_font.render(displayed_message, True, HUDManager.TEXT_COLOR), text_position)
-            if len(text) == 0 and show_continue_message:
-                self.screen.blit(continue_text, (
-                    window_position[0] + self.window_tiles.tile_width * HUDManager.MESSAGEBOX_WIDTH - continue_text.get_width(),
-                    window_position[1] + self.window_tiles.tile_height * HUDManager.MESSAGEBOX_HEIGHT - continue_text.get_height()
-                ))
-            pygame.display.flip()
-            frame_timer.tick(FRAMES_PER_SECOND)
+        self.messagebox.show_message(text)
 
 
 screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
@@ -382,7 +420,8 @@ while is_playing:
 
     hud.update()
 
-    player.update(map_manager, hud)
+    if not hud.messagebox.is_focused:
+        player.update(map_manager, hud)
 
     # Check for player intersection with transition objects.
     for transition in map_manager.transitions:
@@ -391,6 +430,7 @@ while is_playing:
             player.character.rect.x = transition.target_x
             player.character.rect.y = transition.target_y
             scroll_into_view(screen, frame_timer, map_manager, player.character.rect)
+            break  # New map loaded == stop checking transitions on the old map.
 
     map_manager.update_animations()
 

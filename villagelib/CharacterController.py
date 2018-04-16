@@ -21,9 +21,6 @@ class CharacterController:
 
         self.character.sprite.animations.update()
 
-    def speak(self, message):
-        self.character.events.append(CharacterSpeakEvent(self, message))
-
     def on_collided(self, collided_by, delta_x, delta_y):
         """
 			This character was rammed into by another character.

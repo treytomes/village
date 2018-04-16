@@ -8,24 +8,18 @@
 
 npc_sprite_path = "./assets/sprites/npc_male_1.png"
 palette = (
-    (248, 112, 32),  # primary - orange shirt
+    (248, 32, 32),  # primary - blue shirt
     (0, 0, 0),  # secondary - black hair
-    (94, 50, 18)  # tertiary - dark skin
+    (248, 152, 96)  # tertiary - light skin
 )
 
-name = "Greg"
+name = "Innkeeper"
 is_pushable = False
 
 
 def on_create(self):
-    self.character.face_north()
-
-
-def on_collided(self, collided_by, delta_x, delta_y):
-    print(f"{self.character.name}: Watch your step!")
+    self.character.face_south()
 
 
 def on_touched(self, touched_by):
-    self.wave()
-    self.speak(f"{self.character.name}: How are you today?")
-
+    self.speak(f"{self.character.name}: Welcome to the inn!")
