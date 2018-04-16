@@ -24,5 +24,13 @@ def on_collided(self, collided_by, delta_x, delta_y):
     print(f"{self.character.name} collided: ({collided_by.name}, {delta_x}, {delta_y})")
 
 
+num_speaks = 0
 def on_touched(self, touched_by):
-    self.speak(f"Hello {touched_by.name}!")
+    # TODO: Need a better way of tracking state variables.
+    if self.character.locals["num_speaks"] == 0:
+        self.speak(f"Hello {touched_by.name}!")
+        self.character.locals["num_speaks"] += 1
+    else:
+        # TODO: After nodding, he needs to resume facing east.
+        self.nod()
+        self.speak("Yes, I know what you mean.")
