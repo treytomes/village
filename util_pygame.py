@@ -96,7 +96,7 @@ def pygame_image_loader(filename, colorkey, **kwargs):
 
 	#from villagelib import RENDER_SCALE
 	pixelalpha = kwargs.get('pixelalpha', True)
-	image = pygame.image.load(filename).convert_alpha()
+	image = pygame.image.load(filename) #.convert_alpha()
 	#image = pygame.transform.scale(image, (image.get_width() * RENDER_SCALE, image.get_height() * RENDER_SCALE))
 
 	def load_image(rect=None, flags=None):
@@ -113,7 +113,7 @@ def pygame_image_loader(filename, colorkey, **kwargs):
 			tile = handle_transformation(tile, flags)
 
 		tile = smart_convert(tile, colorkey, pixelalpha)
-		return tile
+		return tile.convert_alpha()
 
 	return load_image
 
