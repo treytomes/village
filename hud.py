@@ -197,15 +197,23 @@ class HUDMessageBox(HUDElement):
         column = 0
         for n in range(len(self.displayed_message)):
             ch = self.displayed_message[n]
-            try:
-                self.message_tiles.blit(dst_surface, FONT_TEXT.index(ch), x, y)
-            except:
-                pass
-            x += self.message_tiles.tile_width
-            column += 1
-            if column >= 30:
+            if ch == '\n':
                 x = self.text_position[0]
+                y += self.message_tiles.tile_height
                 column = 0
+            elif (column == 0) and (ch == ' '):
+                pass
+            else:
+                try:
+                    self.message_tiles.blit(dst_surface, FONT_TEXT.index(ch), x, y)
+                except:
+                    pass
+                x += self.message_tiles.tile_width
+                column += 1
+                if column >= 30:
+                    x = self.text_position[0]
+                    column = 0
+                    y += self.message_tiles.tile_height
 
         if self.show_continue_message:
             x = self.text_position[0] #self.window_position[0] + self.window_tiles.tile_width * HUDMessageBox.MESSAGEBOX_WIDTH - len(HUDMessageBox.CONTINUE_TEXT) * self.prompt_tiles.tile_width

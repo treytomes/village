@@ -22,4 +22,4 @@ def on_create(self):
 
 
 def on_touched(self, touched_by):
-    self.speak(f"{self.character.name}: Welcome to the inn!")
+    self.speak(f"{self.character.name}: Welcome to the inn!\n\nIf this were a real inn, you'd be able to sleep here.")
