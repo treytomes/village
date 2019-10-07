@@ -1,5 +1,7 @@
 import pygame
-from villagelib import RENDER_SCALE, TileSet
+from villagelib import SCREEN_WIDTH, SCREEN_HEIGHT, RENDER_SCALE, TileSet
+
+FONT_TEXT: str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!?/:\"'-.,…;#+()%~ <>="
 
 class HUDElement:
     def __init__(self):
@@ -67,7 +69,6 @@ class HUDHotKeySlot(HUDElement):
 
 class HUDLabel(HUDElement):
     #FONT = pygame.font.SysFont("Comic Sans MS", 16)  # , bold=True)
-    FONT_TEXT: str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!?/:\"'-.,…;#+()%~ ="
 
     def __init__(self, x, y, text):
         super().__init__()
@@ -95,7 +96,7 @@ class HUDLabel(HUDElement):
         x = self.position[0]
         for ch in self.__text:
             try:
-                tile_index = HUDLabel.FONT_TEXT.index(ch)
+                tile_index = FONT_TEXT.index(ch)
                 self.font_tiles.blit(dst_surface, tile_index, x, self.position[1])
             except:
                 # The character might not be in the font set.
@@ -109,7 +110,7 @@ class HUDLabel(HUDElement):
 
 
 class HUDMessageBox(HUDElement):
-    MESSAGEBOX_WIDTH = 19
+    MESSAGEBOX_WIDTH = 15 #SCREEN_WIDTH // RENDER_SCALE // 18
     MESSAGEBOX_HEIGHT = 6
     TEXT_COLOR = pygame.Color(255, 255, 255)
     TEXT_ANIMATE_SPEED = 50
@@ -122,10 +123,9 @@ class HUDMessageBox(HUDElement):
         self.window_tiles = TileSet("./assets/ui/window_tiles.png", 3, 3)
         self.window_tiles.scale(RENDER_SCALE)
         self.window_position = (0, 0)
-        self.text_position = (self.window_position[0] + self.window_tiles.tile_width,
-                              self.window_position[1] + self.window_tiles.tile_height)
-        self.font = pygame.font.SysFont("Comic Sans MS", 16)  # , bold=True)
-        self.continue_text = self.font.render(HUDMessageBox.CONTINUE_TEXT, True, HUDMessageBox.CONTINUE_COLOR)
+
+        #self.font = pygame.font.SysFont("Comic Sans MS", 16)  # , bold=True)
+        #self.continue_text = self.font.render(HUDMessageBox.CONTINUE_TEXT, True, HUDMessageBox.CONTINUE_COLOR)
         self.is_focused = False
         self.message = ""
         self.displayed_message = ""
@@ -133,6 +133,25 @@ class HUDMessageBox(HUDElement):
         self.last_animate_time = 0
         self.__key_state = dict()
         self.__last_key_state = dict()
+
+        self.message_tiles: TileSet = TileSet("./assets/font.png", 16, 8)
+        self.message_tiles.scale(RENDER_SCALE)
+        self.message_tiles.recolor_image((
+            (0, 0, 0, 0), # This one will be transparent.
+            (64, 64, 64, 255),
+            (127, 127, 127, 255),
+            HUDMessageBox.TEXT_COLOR))
+
+        self.prompt_tiles: TileSet = TileSet("./assets/font.png", 16, 8)
+        self.prompt_tiles.scale(RENDER_SCALE)
+        self.prompt_tiles.recolor_image((
+            (0, 0, 0, 0), # This one will be transparent.
+            (64, 64, 64, 255),
+            (127, 127, 127, 255),
+            HUDMessageBox.CONTINUE_COLOR))
+
+        self.text_position = (self.window_position[0] + self.window_tiles.tile_width - self.message_tiles.tile_width,
+                              self.window_position[1] + self.window_tiles.tile_height - self.message_tiles.tile_height)
 
     def __get_key_released(self, key):
         try:
@@ -172,12 +191,35 @@ class HUDMessageBox(HUDElement):
             return
 
         self.blit_frame(dst_surface, self.window_position)
-        dst_surface.blit(self.font.render(self.displayed_message, True, HUDMessageBox.TEXT_COLOR), self.text_position)
+        #dst_surface.blit(self.font.render(self.displayed_message, True, HUDMessageBox.TEXT_COLOR), self.text_position)
+        x = self.text_position[0]
+        y = self.text_position[1]
+        column = 0
+        for n in range(len(self.displayed_message)):
+            ch = self.displayed_message[n]
+            try:
+                self.message_tiles.blit(dst_surface, FONT_TEXT.index(ch), x, y)
+            except:
+                pass
+            x += self.message_tiles.tile_width
+            column += 1
+            if column >= 30:
+                x = self.text_position[0]
+                column = 0
+
         if self.show_continue_message:
-            dst_surface.blit(self.continue_text, (
-                self.window_position[0] + self.window_tiles.tile_width * HUDMessageBox.MESSAGEBOX_WIDTH - self.continue_text.get_width(),
-                self.window_position[1] + self.window_tiles.tile_height * HUDMessageBox.MESSAGEBOX_HEIGHT - self.continue_text.get_height()
-            ))
+            x = self.text_position[0] #self.window_position[0] + self.window_tiles.tile_width * HUDMessageBox.MESSAGEBOX_WIDTH - len(HUDMessageBox.CONTINUE_TEXT) * self.prompt_tiles.tile_width
+            y = self.window_position[1] + self.window_tiles.tile_height * HUDMessageBox.MESSAGEBOX_HEIGHT #- self.prompt_tiles.tile_height
+            for ch in HUDMessageBox.CONTINUE_TEXT:
+                try:
+                    self.prompt_tiles.blit(dst_surface, FONT_TEXT.index(ch), x, y)
+                except:
+                    pass
+                x += self.prompt_tiles.tile_width
+            #dst_surface.blit(self.continue_text, (
+            #    self.window_position[0] + self.window_tiles.tile_width * HUDMessageBox.MESSAGEBOX_WIDTH - self.continue_text.get_width(),
+            #    self.window_position[1] + self.window_tiles.tile_height * HUDMessageBox.MESSAGEBOX_HEIGHT - self.continue_text.get_height()
+            #))
 
     def blit_frame(self, dst_surface, window_position):
         window_left: int = window_position[0]

@@ -22,11 +22,6 @@ pygame.init()
 # The HUDManager needs to be initialized after PyGame is initialized.
 from hud import *
 
-SCREEN_WIDTH: int = 256 * RENDER_SCALE
-SCREEN_HEIGHT: int = 224 * RENDER_SCALE
-SCREEN_CENTER_X: int = SCREEN_WIDTH // 2
-SCREEN_CENTER_Y: int = SCREEN_HEIGHT // 2
-FRAMES_PER_SECOND: float = 60.0
 GAME_TITLE: str = "Village Simulator"
 GAME_ICON: str = ASSETS_PATH + "icon.png"
 INITIAL_MAP: str = "Village Mist - Inn"
@@ -35,10 +30,11 @@ class Colors:
     BACKGROUND: pygame.Color = pygame.Color(48, 48, 48)
 
 
-def scroll_into_view(screen: pygame.Surface, frame_timer: pygame.time.Clock, map_manager: MapManager, player_rect: pygame.Rect):
+def scroll_into_view(screen: pygame.Surface, overlay: pygame.Surface, frame_timer: pygame.time.Clock, map_manager: MapManager, player_rect: pygame.Rect):
     """Open the screen with a stage-curtain effect.
 
     :param screen: A reference to the screen the game is being rendered on.
+    :param overlay: The overlay image to blit on top of the screen.
     :param frame_timer: The clock object used to throttle the framerate.
     :param map_manager: The map being rendered.
     :param player_rect: The location and size of the player to center the map on.
@@ -57,6 +53,7 @@ def scroll_into_view(screen: pygame.Surface, frame_timer: pygame.time.Clock, map
         map_manager.render_over_sprites(screen, player_rect.x, player_rect.y)
         pygame.draw.rect(screen, Colors.BACKGROUND, (0, 0, SCREEN_CENTER_X - offset, SCREEN_HEIGHT), 0)
         pygame.draw.rect(screen, Colors.BACKGROUND, (SCREEN_CENTER_X + offset, 0, SCREEN_WIDTH, SCREEN_HEIGHT), 0)
+        screen.blit(overlay, (0, 0))
         pygame.display.flip()
         frame_timer.tick(FRAMES_PER_SECOND)
         offset += CURTAIN_SPEED
@@ -91,8 +88,8 @@ class Player(Character):
 class PlayerController(CharacterController):
     def __init__(self, spawn_point):
         super().__init__(Player(spawn_point))
-        self.walking_speed = 1
-        self.running_speed = 2
+        self.walking_speed = 2
+        self.running_speed = 4
         self.selected_slot = 0
 
     def update(self, map_manager: MapManager, hud):
@@ -227,7 +224,7 @@ while is_playing:
             hud.map_name_label.set_text(map_manager.map_name)
             player.character.rect.x = transition.target_x
             player.character.rect.y = transition.target_y
-            scroll_into_view(screen, frame_timer, map_manager, player.character.rect)
+            scroll_into_view(screen, overlay3x, frame_timer, map_manager, player.character.rect)
             break  # New map loaded == stop checking transitions on the old map.
 
     map_manager.update_animations()
