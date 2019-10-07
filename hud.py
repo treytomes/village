@@ -1,7 +1,6 @@
 import pygame
 from villagelib import RENDER_SCALE, TileSet
 
-
 class HUDElement:
     def __init__(self):
         self.rect = pygame.Rect(0, 0, 0, 0)
@@ -20,7 +19,7 @@ class HUDHotKeySlot(HUDElement):
     BACKGROUND: pygame.Color = pygame.Color(0, 0, 0)
     BORDER_SELECTED: pygame.Color = pygame.Color(0, 0, 127)
     BACKGROUND_SELECTED: pygame.Color = pygame.Color(255, 0, 0)
-    TINY_FONT = pygame.font.SysFont("Comic Sans MS", 8, bold=True)
+    #TINY_FONT = pygame.font.SysFont("Comic Sans MS", 8, bold=True)
 
     def __init__(self, player, key):
         self.player = player # TODO: I may later regret having a strong coupling here.
@@ -29,6 +28,14 @@ class HUDHotKeySlot(HUDElement):
         self.rect = pygame.Rect(0, 0, hotkey_size, hotkey_size)
         self.key = key
         self.is_selected = False
+
+        self.font_tiles: TileSet = TileSet("./assets/font.png", 16, 8)
+        self.font_tiles.scale(RENDER_SCALE)
+        self.font_tiles.recolor_image((
+            (0, 0, 0, 0), # This one will be transparent.
+            (0, 0, 0, 255),
+            (0, 0, 0, 255),
+            HUDHotKeySlot.TEXT))
 
     def update(self):
         self.is_selected = (self.player.selected_slot == self.key)
@@ -52,32 +59,53 @@ class HUDHotKeySlot(HUDElement):
             pygame.draw.rect(dst_surface, HUDHotKeySlot.BACKGROUND,
                              self.rect.inflate(-RENDER_SCALE, -RENDER_SCALE))
             pygame.draw.rect(dst_surface, HUDHotKeySlot.BORDER, self.rect, RENDER_SCALE)
-        dst_surface.blit(HUDHotKeySlot.TINY_FONT.render(str(self.key), True, HUDHotKeySlot.TEXT), (self.rect.x + 3, self.rect.y + 1))
+        
+        #dst_surface.blit(HUDHotKeySlot.TINY_FONT.render(str(self.key), True, HUDHotKeySlot.TEXT), (self.rect.x + 3, self.rect.y + 1))
+        tile_index = int(self.key) + 16 * 7
+        self.font_tiles.blit(dst_surface, tile_index, self.rect.x + 3, self.rect.y + 1)
 
 
 class HUDLabel(HUDElement):
-    FONT = pygame.font.SysFont("Comic Sans MS", 16)  # , bold=True)
+    #FONT = pygame.font.SysFont("Comic Sans MS", 16)  # , bold=True)
+    FONT_TEXT: str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!?/:\"'-.,…;#+()%~ ="
 
     def __init__(self, x, y, text):
         super().__init__()
 
         self.__text = None
-        self.__text_surface = None
-        self.__shadow_surface = None
+        #self.__text_surface = None
+        #self.__shadow_surface = None
 
         self.position = (x, y)
-        self.color = pygame.Color(255, 255, 255)
-        self.shadow_color = pygame.Color(64, 64, 64)
+        self.__color = pygame.Color(255, 255, 255, 255)
+        self.__shadow_color = pygame.Color(64, 64, 64, 255)
         self.set_text(text)
 
+        self.font_tiles: TileSet = TileSet("./assets/font.png", 16, 8)
+        self.font_tiles.scale(RENDER_SCALE)
+        self.font_tiles.recolor_image((
+            (0, 0, 0, 0), # This one will be transparent.
+            self.__shadow_color,
+            (127, 127, 127, 255),
+            self.__color))
+
     def blit(self, dst_surface):
-        dst_surface.blit(self.__shadow_surface, (self.position[0] + 1, self.position[1] + 1))
-        dst_surface.blit(self.__text_surface, self.position)
+        #dst_surface.blit(self.__shadow_surface, (self.position[0] + 1, self.position[1] + 1))
+        #dst_surface.blit(self.__text_surface, self.position)
+        x = self.position[0]
+        for ch in self.__text:
+            try:
+                tile_index = HUDLabel.FONT_TEXT.index(ch)
+                self.font_tiles.blit(dst_surface, tile_index, x, self.position[1])
+            except:
+                # The character might not be in the font set.
+                pass
+            x += self.font_tiles.tile_width
 
     def set_text(self, text):
         self.__text = text
-        self.__text_surface = HUDLabel.FONT.render(self.__text, True, self.color)
-        self.__shadow_surface = HUDLabel.FONT.render(self.__text, True, self.shadow_color)
+        #self.__text_surface = HUDLabel.FONT.render(self.__text, True, self.color)
+        #self.__shadow_surface = HUDLabel.FONT.render(self.__text, True, self.shadow_color)
 
 
 class HUDMessageBox(HUDElement):

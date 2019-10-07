@@ -49,3 +49,23 @@ class TileSet:
     def get_rect(self):
         """Create a new Rect to represent a tile from this TileSet."""
         return pygame.Rect(0, 0, self.tile_width, self.tile_height)
+
+    def recolor_image(self, dst_colors):
+        """
+        Do a direct replacement of the src_colors set with dst_colors.
+        
+        This method will take the source color, then divide it by (256 / len(dst_colors)), then pick that color from the dst_colors array.
+        Sort of like what Minicraft does to color it's tiles.
+        """
+        
+        palette = self.image.get_palette()
+        #if len(dst_colors) != len(palette):
+        #    raise Exception(f"Not enough destination colors to go with the palette: {len(dst_colors)} != {len(palette)}")
+        
+        divisor = 256 // len(dst_colors)
+        for n in range(len(palette)):
+            dst_index = palette[n][0] // divisor
+            self.image.set_palette_at(n, dst_colors[dst_index])
+        
+        self.image.set_colorkey((0, 0, 0, 0))
+
