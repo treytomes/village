@@ -107,17 +107,17 @@ class MapManager:
         SCREEN_CENTER_Y = SCREEN_HEIGHT // 2
 
         screen.blit(self.__ground_surface, (0, 0), (
-        player_x - SCREEN_CENTER_X, player_y - SCREEN_CENTER_Y, player_x + SCREEN_WIDTH, player_y + SCREEN_HEIGHT))
+            player_x - SCREEN_CENTER_X, player_y - SCREEN_CENTER_Y, player_x + SCREEN_WIDTH, player_y + SCREEN_HEIGHT))
         screen.blit(self.__ground_decoration_surface, (0, 0), (
-        player_x - SCREEN_CENTER_X, player_y - SCREEN_CENTER_Y, player_x + SCREEN_WIDTH, player_y + SCREEN_HEIGHT))
+            player_x - SCREEN_CENTER_X, player_y - SCREEN_CENTER_Y, player_x + SCREEN_WIDTH, player_y + SCREEN_HEIGHT))
         screen.blit(self.__blocking_surface, (0, 0), (
-        player_x - SCREEN_CENTER_X, player_y - SCREEN_CENTER_Y, player_x + SCREEN_WIDTH, player_y + SCREEN_HEIGHT))
+            player_x - SCREEN_CENTER_X, player_y - SCREEN_CENTER_Y, player_x + SCREEN_WIDTH, player_y + SCREEN_HEIGHT))
 
     def render_over_sprites(self, screen, player_x, player_y):
         SCREEN_WIDTH = screen.get_width()
         SCREEN_HEIGHT = screen.get_height()
-        SCREEN_CENTER_X = screen.get_width() // 2
-        SCREEN_CENTER_Y = screen.get_height() // 2
+        SCREEN_CENTER_X = SCREEN_WIDTH // 2
+        SCREEN_CENTER_Y = SCREEN_HEIGHT // 2
 
         screen.blit(self.__overhead_surface, (0, 0), (
-        player_x - SCREEN_CENTER_X, player_y - SCREEN_CENTER_Y, player_x + SCREEN_WIDTH, player_y + SCREEN_HEIGHT))
+            player_x - SCREEN_CENTER_X, player_y - SCREEN_CENTER_Y, player_x + SCREEN_WIDTH, player_y + SCREEN_HEIGHT))
