@@ -1,7 +1,7 @@
 from villagelib import *
 
 npc_male_1 = create_npc_sprite("./assets/sprites/npc_male_1.png", (
-    (32, 112, 248),  # primary - blue shirt
+    (32, 112, 248), # primary - blue shirt
     (168, 80, 8),  # secondary - brown hair
     (248, 152, 96)  # tertiary - light skin
 ))

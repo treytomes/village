@@ -15,16 +15,21 @@
 
 from villagelib import *
 
-import sprites
-
-pygame.init()
-
-# The HUDManager needs to be initialized after PyGame is initialized.
-from hud import *
-
 GAME_TITLE: str = "Village Simulator"
 GAME_ICON: str = ASSETS_PATH + "icon.png"
 INITIAL_MAP: str = "Village Mist - Inn"
+
+pygame.init()
+
+# The display must be initialized before any graphics are loaded.
+screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
+pygame.display.set_caption(GAME_TITLE)
+pygame.display.set_icon(pygame.image.load(GAME_ICON).convert_alpha())
+
+import sprites
+
+# The HUDManager needs to be initialized after PyGame is initialized.
+from hud import *
 
 class Colors:
     BACKGROUND: pygame.Color = pygame.Color(48, 48, 48)
@@ -183,11 +188,7 @@ class PlayerController(CharacterController):
                 break
 
 
-screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
-pygame.display.set_caption(GAME_TITLE)
-pygame.display.set_icon(pygame.image.load(GAME_ICON))
-
-overlay3x = pygame.image.load("./assets/overlay3x.png")
+overlay3x = pygame.image.load("./assets/overlay3x.png").convert_alpha()
 
 map_manager = MapManager(INITIAL_MAP)
 
@@ -196,6 +197,9 @@ hud = HUDManager(screen, player)
 hud.map_name_label.set_text(map_manager.map_name)
 
 frame_timer = pygame.time.Clock()
+current_fps = 0
+fps_label = HUDLabel(0, SCREEN_HEIGHT - 8 * 3, f"FPS: {current_fps}")
+hud.elements.append(fps_label)
 
 is_paused = False
 is_playing = True
@@ -209,7 +213,7 @@ while is_playing:
                 is_playing = False
         elif event.type == pygame.KEYUP:
             pass
-
+    
     is_paused = not pygame.key.get_focused()
 
     hud.update()
@@ -234,9 +238,10 @@ while is_playing:
 
     blit_map()
     screen.blit(overlay3x, (0, 0))
-
     pygame.display.flip()
 
-    frame_timer.tick(FRAMES_PER_SECOND)
+    current_fps = (int(1000.0 / frame_timer.tick(FRAMES_PER_SECOND)) + current_fps) // 2
+    fps_label.set_text(f"FPS: {current_fps}")
+    print(current_fps)
 
 pygame.quit()

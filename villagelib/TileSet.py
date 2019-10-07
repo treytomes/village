@@ -8,7 +8,8 @@ class TileSet:
         self.filename = filename
         self.rows = rows
         self.columns = columns
-        self.image = pygame.image.load(filename)
+        self.image = pygame.image.load(filename).convert_alpha()
+        self.image.set_colorkey((0, 0, 0, 0))
         self.rect = self.image.get_rect()
         self.tile_width = self.rect.w // self.columns
         self.tile_height = self.rect.h // self.rows
@@ -57,15 +58,15 @@ class TileSet:
         This method will take the source color, then divide it by (256 / len(dst_colors)), then pick that color from the dst_colors array.
         Sort of like what Minicraft does to color it's tiles.
         """
-        
-        palette = self.image.get_palette()
-        #if len(dst_colors) != len(palette):
-        #    raise Exception(f"Not enough destination colors to go with the palette: {len(dst_colors)} != {len(palette)}")
-        
-        divisor = 256 // len(dst_colors)
-        for n in range(len(palette)):
-            dst_index = palette[n][0] // divisor
-            self.image.set_palette_at(n, dst_colors[dst_index])
-        
-        self.image.set_colorkey((0, 0, 0, 0))
 
+        src_colors = ((0, 0, 0), (81, 81, 81), (173, 173, 173), (255, 255, 255))
+        pixels = pygame.PixelArray(self.image)
+        for n in range(0, len(dst_colors)):
+            pixels.replace(src_colors[n], dst_colors[n])
+        
+        # This bit would be necessary if it were a palette-based image.
+        #divisor = 256 // len(dst_colors)
+        #palette = self.image.get_palette()
+        #for n in range(len(palette)):
+        #    dst_index = palette[n][0] // divisor
+        #    self.image.set_palette_at(n, dst_colors[dst_index])
