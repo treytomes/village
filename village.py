@@ -190,6 +190,8 @@ screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
 pygame.display.set_caption(GAME_TITLE)
 pygame.display.set_icon(pygame.image.load(GAME_ICON))
 
+overlay3x = pygame.image.load("./assets/overlay3x.png")
+
 map_manager = MapManager(INITIAL_MAP)
 
 player = PlayerController(map_manager.spawn_point)
@@ -234,6 +236,7 @@ while is_playing:
         npc.update(map_manager, hud)
 
     blit_map()
+    screen.blit(overlay3x, (0, 0))
 
     pygame.display.flip()
 
