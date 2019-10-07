@@ -22,8 +22,8 @@ pygame.init()
 # The HUDManager needs to be initialized after PyGame is initialized.
 from hud import *
 
-SCREEN_WIDTH: int = 640
-SCREEN_HEIGHT: int = 480
+SCREEN_WIDTH: int = 256 * RENDER_SCALE
+SCREEN_HEIGHT: int = 240 * RENDER_SCALE
 SCREEN_CENTER_X: int = SCREEN_WIDTH // 2
 SCREEN_CENTER_Y: int = SCREEN_HEIGHT // 2
 FRAMES_PER_SECOND: float = 60.0

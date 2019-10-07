@@ -1,6 +1,6 @@
 import pygame
 
-RENDER_SCALE = 2
+RENDER_SCALE = 3
 ASSETS_PATH = "./assets/"
 
 NORTH = 1
