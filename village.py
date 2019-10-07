@@ -242,6 +242,5 @@ while is_playing:
 
     current_fps = (int(1000.0 / frame_timer.tick(FRAMES_PER_SECOND)) + current_fps) // 2
     fps_label.set_text(f"FPS: {current_fps}")
-    print(current_fps)
 
 pygame.quit()
