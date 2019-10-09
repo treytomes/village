@@ -58,7 +58,8 @@ def scroll_into_view(screen: pygame.Surface, overlay: pygame.Surface, frame_time
         map_manager.render_over_sprites(screen, player_rect.x, player_rect.y)
         pygame.draw.rect(screen, Colors.BACKGROUND, (0, 0, SCREEN_CENTER_X - offset, SCREEN_HEIGHT), 0)
         pygame.draw.rect(screen, Colors.BACKGROUND, (SCREEN_CENTER_X + offset, 0, SCREEN_WIDTH, SCREEN_HEIGHT), 0)
-        screen.blit(overlay, (0, 0))
+        if overlay != None:
+            screen.blit(overlay, (0, 0))
         pygame.display.flip()
         frame_timer.tick(FRAMES_PER_SECOND)
         offset += CURTAIN_SPEED
@@ -93,8 +94,8 @@ class Player(Character):
 class PlayerController(CharacterController):
     def __init__(self, spawn_point):
         super().__init__(Player(spawn_point))
-        self.walking_speed = 2
-        self.running_speed = 4
+        self.walking_speed = 1
+        self.running_speed = 2
         self.selected_slot = 0
 
     def update(self, map_manager: MapManager, hud):
@@ -188,7 +189,10 @@ class PlayerController(CharacterController):
                 break
 
 
-overlay3x = pygame.image.load("./assets/overlay3x.png").convert_alpha()
+if RENDER_SCALE == 3:
+    overlay = pygame.image.load("./assets/overlay3x.png").convert_alpha()
+else:
+    overlay = None
 
 map_manager = MapManager(INITIAL_MAP)
 
@@ -228,7 +232,7 @@ while is_playing:
             hud.map_name_label.set_text(map_manager.map_name)
             player.character.rect.x = transition.target_x
             player.character.rect.y = transition.target_y
-            scroll_into_view(screen, overlay3x, frame_timer, map_manager, player.character.rect)
+            scroll_into_view(screen, overlay, frame_timer, map_manager, player.character.rect)
             break  # New map loaded == stop checking transitions on the old map.
 
     map_manager.update_animations()
@@ -237,7 +241,8 @@ while is_playing:
         npc.update(map_manager, hud)
 
     blit_map()
-    screen.blit(overlay3x, (0, 0))
+    if overlay != None:
+        screen.blit(overlay, (0, 0))
     pygame.display.flip()
 
     current_fps = (int(1000.0 / frame_timer.tick(FRAMES_PER_SECOND)) + current_fps) // 2

@@ -127,6 +127,7 @@ class HUDMessageBox(HUDElement):
         #self.font = pygame.font.SysFont("Comic Sans MS", 16)  # , bold=True)
         #self.continue_text = self.font.render(HUDMessageBox.CONTINUE_TEXT, True, HUDMessageBox.CONTINUE_COLOR)
         self.is_focused = False
+        self.is_paused = False
         self.message = ""
         self.displayed_message = ""
         self.show_continue_message = False
@@ -169,18 +170,24 @@ class HUDMessageBox(HUDElement):
             return
 
         # Check for key press.
-        if len(self.message) == 0:
+        if self.is_paused:
             self.__last_key_state = self.__key_state
             self.__key_state = pygame.key.get_pressed()
             if self.__get_key_released(HUDMessageBox.CONTINUE_KEY):
-                self.is_focused = False
+                self.is_paused = False
+                self.displayed_message = ""
+                if len(self.message) == 0:
+                    self.is_focused = False
 
         # Animate the text.
-        if len(self.message) > 0:
-            if pygame.time.get_ticks() - self.last_animate_time > HUDMessageBox.TEXT_ANIMATE_SPEED:
-                self.last_animate_time = pygame.time.get_ticks()
-                self.displayed_message = self.displayed_message + self.message[0]
-                self.message = self.message[1:]
+        if not self.is_paused:
+            if len(self.message) > 0:
+                if pygame.time.get_ticks() - self.last_animate_time > HUDMessageBox.TEXT_ANIMATE_SPEED:
+                    self.last_animate_time = pygame.time.get_ticks()
+                    self.displayed_message = self.displayed_message + self.message[0]
+                    self.message = self.message[1:]
+            if len(self.message) == 0:
+                self.is_paused = True
         else:
             if pygame.time.get_ticks() - self.last_animate_time > HUDMessageBox.BLINK_ANIMATE_SPEED:
                 self.last_animate_time = pygame.time.get_ticks()
@@ -191,9 +198,10 @@ class HUDMessageBox(HUDElement):
             return
 
         self.blit_frame(dst_surface, self.window_position)
-        #dst_surface.blit(self.font.render(self.displayed_message, True, HUDMessageBox.TEXT_COLOR), self.text_position)
+
         x = self.text_position[0]
         y = self.text_position[1]
+        row = 0
         column = 0
         for n in range(len(self.displayed_message)):
             ch = self.displayed_message[n]
@@ -212,22 +220,22 @@ class HUDMessageBox(HUDElement):
                 column += 1
                 if column >= 30:
                     x = self.text_position[0]
-                    column = 0
                     y += self.message_tiles.tile_height
+                    column = 0
+                    row += 1
+                    if row == 6:
+                        row = 0
+                        self.is_paused = True
 
         if self.show_continue_message:
-            x = self.text_position[0] #self.window_position[0] + self.window_tiles.tile_width * HUDMessageBox.MESSAGEBOX_WIDTH - len(HUDMessageBox.CONTINUE_TEXT) * self.prompt_tiles.tile_width
-            y = self.window_position[1] + self.window_tiles.tile_height * HUDMessageBox.MESSAGEBOX_HEIGHT #- self.prompt_tiles.tile_height
+            x = self.text_position[0]
+            y = self.window_position[1] + self.window_tiles.tile_height * HUDMessageBox.MESSAGEBOX_HEIGHT
             for ch in HUDMessageBox.CONTINUE_TEXT:
                 try:
                     self.prompt_tiles.blit(dst_surface, FONT_TEXT.index(ch), x, y)
                 except:
                     pass
                 x += self.prompt_tiles.tile_width
-            #dst_surface.blit(self.continue_text, (
-            #    self.window_position[0] + self.window_tiles.tile_width * HUDMessageBox.MESSAGEBOX_WIDTH - self.continue_text.get_width(),
-            #    self.window_position[1] + self.window_tiles.tile_height * HUDMessageBox.MESSAGEBOX_HEIGHT - self.continue_text.get_height()
-            #))
 
     def blit_frame(self, dst_surface, window_position):
         window_left: int = window_position[0]

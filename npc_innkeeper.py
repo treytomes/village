@@ -22,4 +22,15 @@ def on_create(self):
 
 
 def on_touched(self, touched_by):
-    self.speak(f"{self.character.name}: Welcome to the inn!\n\nIf this were a real inn, you'd be able to sleep here.")
+    self.speak(f"""
+{self.character.name}: Welcome to the inn!
+
+If this were a real inn, you'd be able to sleep here.
+Why are you still reading this?
+
+There really isn't much more to say.  We'll mostly be testing the paging ability of the messagebox control from here.
+
+Hopefully the scrolling text paused before dumping this part of the message on you.  I guess I'm just really chatty today.
+
+Please come back again later!
+""")
